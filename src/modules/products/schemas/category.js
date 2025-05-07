@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../../config/dataBase";
+import { Product } from "./product";
 
 export const Category = sequelize.define('Category', {
     category_id : {
@@ -14,4 +15,9 @@ export const Category = sequelize.define('Category', {
 }, {
     tableName : 'Category',
     timestamps : false,
+})
+
+Category.hasMany(Product, {
+    foreignKey : 'category_id',
+    as : 'product',
 })

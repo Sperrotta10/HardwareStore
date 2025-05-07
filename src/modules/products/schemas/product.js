@@ -1,5 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../../config/dataBase";
+import { itemCart } from "../../cart_shopping/schemas/itemCart.js";
+import { Category } from "./category.js";
 
 export const Product = sequelize.define('Product', {
     product_id : {
@@ -34,6 +36,10 @@ export const Product = sequelize.define('Product', {
     category_id : {
         type : DataTypes.INTEGER,
         allowNull : false,
+        references : {
+            model : Category,
+            key : 'category_id',
+        }
     },
     offer_percentage : {
         type : DataTypes.FLOAT,
@@ -54,4 +60,14 @@ export const Product = sequelize.define('Product', {
 }, {
     tableName : 'Product',
     timestamps : false,
+})
+
+Product.belongsTo(Category, {
+    foreignKey : 'category_id',
+    as : 'category',
+})
+
+Product.hasMany(itemCart, {
+    foreignKey : 'product_id',
+    as : 'itemCart',
 })
