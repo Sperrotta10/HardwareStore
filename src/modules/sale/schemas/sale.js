@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../../config/dataBase";
+import { User } from "../../register/schemas/user";
 
 export const Sale = sequelize.define('Sale', {
     sale_id : {
@@ -10,6 +11,10 @@ export const Sale = sequelize.define('Sale', {
     user_id : {
         type : DataTypes.INTEGER,
         allowNull : false,
+        references : {
+            model : User,
+            key : 'user_id',
+        }
     },
     sale : {
         type : DataTypes.STRING,
@@ -26,4 +31,9 @@ export const Sale = sequelize.define('Sale', {
 }, {
     tableName : 'Sale',
     timestamps : false,
+})
+
+Sale.belongsTo(User, {
+    foreignKey : 'user_id',
+    as : 'user',
 })
