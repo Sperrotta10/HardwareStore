@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../../config/dataBase";
+import { Product } from "../../products/schemas/product.js";
 
 export const Notification = sequelize.define('Notification', {
     notification_id : {
@@ -10,6 +11,10 @@ export const Notification = sequelize.define('Notification', {
     product_id : {
         type : DataTypes.INTEGER,
         allowNull : false,
+        references : {
+            model : Product,
+            key : 'product_id',
+        }
     },
     message : {
         type : DataTypes.TEXT,
@@ -26,4 +31,9 @@ export const Notification = sequelize.define('Notification', {
 }, {
     tableName : 'Notification',
     timestamps : false,
+})
+
+Notification.belongsTo(Product, {
+    foreignKey : 'product_id',
+    as : 'product',
 })
