@@ -1,5 +1,8 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../../config/dataBase";
+import { Cart } from "../../cart_shopping/schemas/cart";
+import { Role } from "./role.js";
+import { Sale } from "../../sale/schemas/sale.js";
 
 export const User = sequelize.define('User', {
     user_id : {
@@ -23,6 +26,10 @@ export const User = sequelize.define('User', {
     role_id : {
         type : DataTypes.INTEGER,
         allowNull : false,
+        references : {
+            model : Role,
+            key : 'role_id',
+        }
     },
     user_status : {
         type : DataTypes.BOOLEAN,
@@ -39,4 +46,19 @@ export const User = sequelize.define('User', {
 }, {
     tableName : 'User',
     timestamps : false,
+})
+
+User.belongsTo(Role, {
+    foreignKey : 'role_id',
+    as : 'role',
+})
+
+User.hasOne(Cart, {
+    foreignKey : 'user_id',
+    as : 'cart'
+})
+
+User.hasMany(Sale, {
+    foreignKey : 'user_id',
+    as : 'sale',
 })

@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../../config/dataBase";
+import { User } from "./user";
 
 export const Role = sequelize.define('Role', {
     role_id : {
@@ -14,4 +15,9 @@ export const Role = sequelize.define('Role', {
 }, {
     tableName : 'Role',
     timestamps : false,
+})
+
+Role.hasMany(User, {
+    foreignKey : 'role_id',
+    as : 'user',
 })
