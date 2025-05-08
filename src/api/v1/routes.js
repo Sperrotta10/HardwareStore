@@ -9,10 +9,10 @@ import { saleRouter } from "../../modules/sale/router/sale.js"
 
 export const apiRouter = Router();
 
-apiRouter.use("/cart-shopping", cartRouter);
-apiRouter.use("/login", loginRouter);
-apiRouter.use("/notification", notificationRouter);
-apiRouter.use("/pay", payRouter);
+//apiRouter.use("/cart-shopping", cartRouter);
+//apiRouter.use("/login", loginRouter);
+//apiRouter.use("/notification", notificationRouter);
+//apiRouter.use("/pay", payRouter);
 apiRouter.use("/products", productsRouter);
-apiRouter.use("/register", registerRouter);
-apiRouter.use("/sale", saleRouter);
+//apiRouter.use("/register", registerRouter);
+//apiRouter.use("/sale", saleRouter);
