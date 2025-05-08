@@ -1,4 +1,7 @@
-CREATE TABLE `Producto` (
+create database hardwarestore;
+use hardwarestore;
+
+CREATE TABLE `Product` (
   `product_id` int PRIMARY KEY,
   `name` varchar(255),
   `description` text,
@@ -13,12 +16,12 @@ CREATE TABLE `Producto` (
   `updated_at` date
 );
 
-CREATE TABLE `Categoria` (
+CREATE TABLE `Category` (
   `category_id` int PRIMARY KEY,
   `name` varchar(255)
 );
 
-CREATE TABLE `Usuario` (
+CREATE TABLE `User` (
   `user_id` int PRIMARY KEY,
   `user_name` varchar(255),
   `email` varchar(255),
@@ -29,43 +32,33 @@ CREATE TABLE `Usuario` (
   `updated_at` date
 );
 
-CREATE TABLE `Roles` (
+CREATE TABLE `Role` (
   `role_id` int PRIMARY KEY,
   `name` varchar(255)
 );
 
-CREATE TABLE `Carrito` (
+CREATE TABLE `Cart` (
   `cart_id` int PRIMARY KEY,
   `user_id` int,
   `created_at` date,
   `updated_at` date
 );
 
-CREATE TABLE `ItemsCarrito` (
+CREATE TABLE `itemCart` (
   `item_id` int PRIMARY KEY,
   `cart_id` int,
   `product_id` int,
   `quantity` int
 );
 
-CREATE TABLE `Ventas` (
+CREATE TABLE `Sale` (
   `sale_id` int PRIMARY KEY,
   `user_id` int,
   `sale_total` float,
   `created_at` date
 );
 
-/*
-CREATE TABLE `ItemsVenta` (
-  `item_id` int PRIMARY KEY,
-  `sale_id` int,
-  `product_id` int,
-  `quantity` int,
-  `price` float
-);
-*/
-
-CREATE TABLE `Notificaciones` (
+CREATE TABLE `Notification` (
   `notification_id` int PRIMARY KEY,
   `product_id` int,
   `message` text,
@@ -73,22 +66,38 @@ CREATE TABLE `Notificaciones` (
   `created_at` date
 );
 
-ALTER TABLE `Producto` ADD FOREIGN KEY (`category_id`) REFERENCES `Categoria` (`category_id`);
 
-ALTER TABLE `Usuario` ADD FOREIGN KEY (`role_id`) REFERENCES `Roles` (`role_id`);
+ALTER TABLE `Product` ADD FOREIGN KEY (`category_id`) REFERENCES `Category` (`category_id`);
 
-ALTER TABLE `Carrito` ADD FOREIGN KEY (`user_id`) REFERENCES `Usuario` (`user_id`);
+ALTER TABLE `User` ADD FOREIGN KEY (`role_id`) REFERENCES `Role` (`role_id`);
 
-ALTER TABLE `ItemsCarrito` ADD FOREIGN KEY (`cart_id`) REFERENCES `Carrito` (`cart_id`);
+ALTER TABLE `Cart` ADD FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`);
 
-ALTER TABLE `ItemsCarrito` ADD FOREIGN KEY (`product_id`) REFERENCES `Producto` (`product_id`);
+ALTER TABLE `itemCart` ADD FOREIGN KEY (`cart_id`) REFERENCES `Cart` (`cart_id`);
 
-ALTER TABLE `Ventas` ADD FOREIGN KEY (`user_id`) REFERENCES `Usuario` (`user_id`);
+ALTER TABLE `itemCart` ADD FOREIGN KEY (`product_id`) REFERENCES `Product` (`product_id`);
 
-/*
-ALTER TABLE `ItemsVenta` ADD FOREIGN KEY (`sale_id`) REFERENCES `Ventas` (`sale_id`);
+ALTER TABLE `Sale` ADD FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`);
 
-ALTER TABLE `ItemsVenta` ADD FOREIGN KEY (`product_id`) REFERENCES `Producto` (`product_id`);
-*/
+ALTER TABLE `Notification` ADD FOREIGN KEY (`product_id`) REFERENCES `Product` (`product_id`);
 
-ALTER TABLE `Notificaciones` ADD FOREIGN KEY (`product_id`) REFERENCES `Producto` (`product_id`);
+--- seleccionar tablas
+SELECT * FROM Cart;
+SELECT * FROM Category;
+SELECT * FROM itemCart;
+SELECT * FROM Notification;
+SELECT * FROM Product;
+SELECT * FROM Role;
+SELECT * FROM Sale;
+SELECT * FROM User;
+
+--- agregar datos a category y role
+INSERT INTO `Category` (`category_id`, `name`) VALUES
+(1, 'Herramientas eléctricas'),
+(2, 'Herramientas manuales'),
+(3, 'Materiales de construcción'),
+(4, 'Pinturas y acabados'),
+(5, 'Plomería'),
+(6, 'Electricidad'),
+(7, 'Accesorios para el hogar'),
+(8, 'Equipo de protección')
