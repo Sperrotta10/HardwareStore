@@ -18,6 +18,7 @@ async function main() {
     try {
 
         await sequelize.authenticate();
+        await sequelize.sync();
         console.log("===============================================")
         console.log('✅ Conexión de la base de datos establecida.');
 
