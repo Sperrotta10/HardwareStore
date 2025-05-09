@@ -14,5 +14,5 @@ export const apiRouter = Router();
 //apiRouter.use("/notification", notificationRouter);
 //apiRouter.use("/pay", payRouter);
 apiRouter.use("/products", productsRouter);
-//apiRouter.use("/register", registerRouter);
+apiRouter.use("/register", registerRouter);
 //apiRouter.use("/sale", saleRouter);
