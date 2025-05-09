@@ -8,4 +8,5 @@ export const enviroment = {
     DB_USER : process.env.DB_USER,
     DB_PORT : process.env.DB_PORT,
     DB_PASSWORD : process.env.DB_PASSWORD,
+    SALT : process.env.SALT
 }
