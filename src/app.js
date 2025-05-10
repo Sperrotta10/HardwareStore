@@ -1,4 +1,5 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 import { enviroment } from "./config/enviroment.js";
 import { sequelize } from "./config/dataBase.js"
 import { apiRouter } from "./api/v1/routes.js"
@@ -8,6 +9,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json()); // middleware que permite el manejo de jsons
+app.use(cookieParser()); // middleware que permite el manejo de cookies
 
 app.use("/api/v1/", apiRouter);
 
