@@ -27,13 +27,13 @@ export class ModelLogin {
             if(!verifyPassword) return {message : "Error al loguearse"};
 
             const token = jwt.sign(
-                {user_id : user.user_id, user_name : user.user_name, email : user.email}, 
+                {user_id : user.user_id, user_name : user.user_name, email : user.email, role : user.role.name }, 
                 enviroment.JWT_SECRET_KEY,
                 {expiresIn : '1h'}
             )
 
             const refresh_token = jwt.sign(
-                { user_id: user.user_id, user_name : user.user_name, email : user.email },
+                { user_id: user.user_id, user_name : user.user_name, email : user.email, role : user.role.name },
                 enviroment.REFRESH_JWT_SECRET_KEY,
                 { expiresIn: '7d' }
             );
